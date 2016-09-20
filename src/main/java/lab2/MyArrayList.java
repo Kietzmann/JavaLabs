@@ -3,6 +3,7 @@ package lab2;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Created by Dmytro on 07.09.2016.
@@ -82,11 +83,13 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         return (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
     }
 
+    @Override
     public void add(E element) {
         ensureCapacityInternal(size + 1);
         elementData[size++] = element;
     }
 
+    @Override
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         ensureCapacityInternal(size + 1);
@@ -95,14 +98,17 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         size++;
     }
 
-    public void addAll(E[] elements) {
-        Object[] a = elements;
+    @Override
+    public void addAll(Collection<? extends E> elements) {
+        Object[] a = elements.toArray();
         int numNew = a.length;
         ensureCapacity(size + numNew);
         System.arraycopy(a, 0, elementData, size, numNew);
         size += numNew;
     }
 
+
+    @Override
     public void addAll(int index, Collection<? extends E> elements) {
         rangeCheckForAdd(index);
         Object[] a = elements.toArray();
@@ -117,11 +123,13 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         size += numNew;
     }
 
+    @Override
     public E get(int index) {
         rangeCheck(index);
         return elementData(index);
     }
 
+    @Override
     public E remove(int index) {
         rangeCheck(index);
 
@@ -135,12 +143,14 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         return oldValue;
     }
 
+    @Override
     public void set(int index, E element) {
         rangeCheck(index);
         E oldValue = elementData(index);
         elementData[index] = element;
     }
 
+    @Override
     public int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < size; i++) {
@@ -157,6 +167,7 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         return -1;
     }
 
+    @Override
     public int size() {
         return size;
     }
@@ -165,6 +176,7 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         return size == 0;
     }
 
+    @Override
     public Object[] toArray() {
         return Arrays.copyOf(elementData, size);
     }
@@ -184,7 +196,7 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         return "Index: " + index + ", Size: " + size;
     }
 
-    E elementData(int index) {
+    private E elementData(int index) {
         return (E) elementData[index];
     }
 }
