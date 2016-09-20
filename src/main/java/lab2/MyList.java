@@ -10,7 +10,7 @@ public interface MyList<E> {
 
     void add(int index, E element);
 
-    void addAll(E[] elements);
+    void addAll(Collection<? extends E> elements);
 
     void addAll(int index, Collection<? extends E> elements);
 
@@ -25,4 +25,6 @@ public interface MyList<E> {
     int size();
 
     Object[] toArray();
+
+
 }
