@@ -11,18 +11,46 @@ import java.util.List;
  */
 public class MaxLineReader {
 
+    public static final String REGEX = "([^a-zA-Z']+)'*\\1*";
+
     public MaxLineReader() {
     }
 
-    public String getMaxWordCountLine(List<String> ribbonsList){
 
+    public List<String> getMaxWordCountLine(List<String> ribbonsList) {
+
+        if (ribbonsList == null)
+            throw new IllegalArgumentException("List of strings can't be null!");
+
+        List<String> result = null;
+
+        if (ribbonsList.size() == 0) {
+            return result;
+        }
+        result = new ArrayList<>(ribbonsList);
+        int position = 0;
+        int maxSize = getWordsCount(ribbonsList.get(position));
+        for (int i = 1; i < ribbonsList.size(); i++) {
+            if (maxSize < getWordsCount(ribbonsList.get(i))) {
+                result.remove(position);
+                position = i;
+                maxSize = getWordsCount(ribbonsList.get(position));
+            } else {
+                result.remove(i);
+            }
+        }
+        return result;
     }
 
-    private static
+    public int getWordsCount(String sentence) {
+        return sentence.split(REGEX).length;
+    }
+
 
     private List<String> readFile(String filePath) {
+        List<String> resultList = null;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            List<String> resultList = new ArrayList<>();
+            resultList = new ArrayList<>();
             String currentLine;
             while ((currentLine = br.readLine()) != null) {
                 resultList.add(currentLine);
@@ -31,5 +59,6 @@ public class MaxLineReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return resultList;
     }
 }
