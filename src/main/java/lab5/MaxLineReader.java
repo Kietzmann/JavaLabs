@@ -3,8 +3,11 @@ package lab5;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by dkytsmen on 9/22/16.
@@ -61,4 +64,12 @@ public class MaxLineReader {
         }
         return resultList;
     }
+
+//    public void lambdaFilter(String path) {
+//        try {
+//            Files.lines(Paths.get(path)).map(line -> line.split())
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
