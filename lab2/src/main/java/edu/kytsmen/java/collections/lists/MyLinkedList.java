@@ -147,7 +147,7 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
