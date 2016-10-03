@@ -1,4 +1,4 @@
-package edu.kytsmen.classloader;
+package edu.kytsmen.java.classloader.alpha;
 import javafx.util.Pair;
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package edu.kytsmen.classloader;
+package edu.kytsmen.java.classloader.alpha;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 

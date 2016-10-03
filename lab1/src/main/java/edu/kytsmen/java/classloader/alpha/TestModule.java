@@ -1,4 +1,4 @@
-package edu.kytsmen.classloader;
+package edu.kytsmen.java.classloader.alpha;
 
 /**
  * Created by Dmytro on 25.09.2016.
