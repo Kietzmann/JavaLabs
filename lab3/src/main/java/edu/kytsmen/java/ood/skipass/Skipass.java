@@ -3,30 +3,48 @@ package edu.kytsmen.java.ood.skipass;
 
 import edu.kytsmen.java.ood.SkipassType;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by dkytsmen on 9/20/16.
  */
 public abstract class Skipass {
     protected int UID;
     protected SkipassType passType;
-    protected boolean isBlocked;
+    protected boolean blocked;
+    private LocalDateTime expireDate;
+
 
     public Skipass(int UID, SkipassType passType) {
         this.UID = UID;
         this.passType = passType;
-        this.isBlocked = false;
+        this.blocked = false;
     }
 
-    public Skipass() {
+    public Skipass(int UID, SkipassType passType, LocalDateTime expireDate) {
+        this(UID, passType);
+        this.expireDate = expireDate;
     }
 
-    public void block() {
-        this.isBlocked = true;
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
-    public void unblock() {
-        this.isBlocked = false;
+    public int getUID() {
+        return UID;
     }
 
-    public abstract boolean isProcessed();
+    public SkipassType getPassType() {
+        return passType;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public LocalDateTime getExpireDate() {
+        return expireDate;
+    }
+
+    public abstract boolean isEligible();
 }
