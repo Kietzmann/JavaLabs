@@ -8,18 +8,22 @@ import java.util.List;
  * Created by dkytsmen on 9/23/16.
  */
 public class IdiomaticCounter {
+    public static final String MAX_NUMBER_OF_WORDS_IN_A_LINE_IS = "Max number of words in a line is: ";
+    public static final String LINE_S_WITH_MAX_WORD_COUNT = "Line(s) with max word count: ";
     private int currentmaxCount = 0;
     private List<String> lines = new ArrayList<String>();
 
-    public void readMaxLineCount(String fileName) {
-        FileInputStream fileInputStream = null;
-        DataInputStream dataInputStream = null;
+    public List<String> readMaxLineCount(String fileName) {
+        List<String> lines = null;
+        FileInputStream fileInputStream;
+        DataInputStream dataInputStream;
         BufferedReader bufferedReader = null;
         try {
             fileInputStream = new FileInputStream(fileName);
             dataInputStream = new DataInputStream(fileInputStream);
             bufferedReader = new BufferedReader(new InputStreamReader(dataInputStream));
             String line = null;
+            lines = new ArrayList<>();
             while ((line = bufferedReader.readLine()) != null) {
 
                 int count = (line.split("\\s+")).length;
@@ -43,6 +47,7 @@ public class IdiomaticCounter {
                 e.printStackTrace();
             }
         }
+        return lines;
     }
 
     public int getCurrentmaxCount() {
@@ -62,10 +67,9 @@ public class IdiomaticCounter {
     }
 
     public void processFilter(String filePath) {
-        readMaxLineCount(filePath);
-        System.out.println("Max number of words in a line is: " + getCurrentmaxCount());
-        System.out.println("Line with max word count: ");
-        List<String> lines = getLines();
+        List<String> lines = readMaxLineCount(filePath);
+        System.out.println(MAX_NUMBER_OF_WORDS_IN_A_LINE_IS + getCurrentmaxCount());
+        System.out.println(LINE_S_WITH_MAX_WORD_COUNT);
         for (String line : lines) {
             System.out.println(line);
         }
