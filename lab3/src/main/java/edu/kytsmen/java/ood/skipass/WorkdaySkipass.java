@@ -35,8 +35,14 @@ public class WorkdaySkipass extends Skipass {
         }
     }
 
+
     @Override
-    public boolean isProcessed() {
+    public boolean isEligible() {
         return false;
+    }
+
+    @Override
+    public int getLiftsAmount() {
+        return 0;
     }
 }

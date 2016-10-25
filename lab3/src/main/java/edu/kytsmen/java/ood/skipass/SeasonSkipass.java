@@ -31,6 +31,11 @@ public class SeasonSkipass extends Skipass {
         return false;
     }
 
+    @Override
+    public int getLiftsAmount() {
+        return liftsAmount;
+    }
+
     private boolean isRightPeriod() {
         LocalDate now = LocalDate.now();
         return now.isAfter(fromPeriod) && now.isBefore(toPeriod);

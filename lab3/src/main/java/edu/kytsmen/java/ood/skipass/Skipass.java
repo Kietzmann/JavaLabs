@@ -47,4 +47,10 @@ public abstract class Skipass {
     }
 
     public abstract boolean isEligible();
+
+    public abstract int getLiftsAmount();
+
+    public LocalDateTime getNow() {
+        return LocalDateTime.now();
+    }
 }

@@ -30,6 +30,11 @@ public class QuanitySkipass extends Skipass {
         return false;
     }
 
+    @Override
+    public int getLiftsAmount() {
+        return 0;
+    }
+
     private boolean isExpired() {
         return liftAmmount == 0;
     }
