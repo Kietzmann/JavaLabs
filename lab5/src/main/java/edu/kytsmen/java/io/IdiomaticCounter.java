@@ -1,28 +1,28 @@
 package edu.kytsmen.java.io;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dkytsmen on 9/23/16.
- */
 public class IdiomaticCounter {
-    public static final String MAX_NUMBER_OF_WORDS_IN_A_LINE_IS = "Max number of words in a line is: ";
-    public static final String LINE_S_WITH_MAX_WORD_COUNT = "Line(s) with max word count: ";
+    private static final String MAX_NUMBER_OF_WORDS_IN_A_LINE_IS = "Max number of words in a line is: ";
+    private static final String LINE_S_WITH_MAX_WORD_COUNT = "Line(s) with max word count: ";
     private int currentmaxCount = 0;
     private List<String> lines = new ArrayList<String>();
 
     public List<String> readMaxLineCount(String fileName) {
         List<String> lines = null;
-        FileInputStream fileInputStream;
-        DataInputStream dataInputStream;
-        BufferedReader bufferedReader = null;
-        try {
-            fileInputStream = new FileInputStream(fileName);
-            dataInputStream = new DataInputStream(fileInputStream);
-            bufferedReader = new BufferedReader(new InputStreamReader(dataInputStream));
-            String line = null;
+//        FileInputStream fileInputStream;
+//        DataInputStream dataInputStream;
+//        BufferedReader bufferedReader = null;
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+//            fileInputStream = new FileInputStream(fileName);
+//            dataInputStream = new DataInputStream(fileInputStream);
+//            bufferedReader = new BufferedReader(new InputStreamReader(dataInputStream));
+            String line;
             lines = new ArrayList<>();
             while ((line = bufferedReader.readLine()) != null) {
 
@@ -40,12 +40,12 @@ public class IdiomaticCounter {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedReader != null) bufferedReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//        } finally {
+//            try {
+//                if (bufferedReader != null) bufferedReader.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
         return lines;
     }

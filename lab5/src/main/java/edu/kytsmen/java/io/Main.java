@@ -11,5 +11,10 @@ public class Main {
         String delimiter = "/lab5/src/main/java/edu/kytsmen/java/io/";
         String filePath = workingDir + delimiter + filename;
         counter.processFilter(filePath);
+        System.out.println();
+        LambdaFilter filter = new LambdaFilter();
+        filter.filter(filePath);
+
+
     }
 }
