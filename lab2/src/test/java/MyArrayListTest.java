@@ -8,7 +8,9 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by dmytro on 03.10.16.
@@ -107,6 +109,7 @@ public class MyArrayListTest extends Assert {
         myList.addAll(1, Arrays.asList("c", "d", "c"));
         assertArrayEquals(myList.toArray(), new String[]{"a", "c", "d", "c", "b", "c"});
     }
+
 
     @Test
     public void testForCapacityGrowth() {

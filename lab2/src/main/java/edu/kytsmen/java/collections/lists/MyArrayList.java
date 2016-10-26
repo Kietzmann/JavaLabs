@@ -1,17 +1,8 @@
 package edu.kytsmen.java.collections.lists;
 
-/**
- * Created by dkytsmen on 10/3/16.
- */
-
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
-/**
- * Created by Dmytro on 07.09.2016.
- */
 public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Serializable {
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ELEMENTDATA = {};
@@ -36,18 +27,18 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         elementData = collection.toArray();
         size = elementData.length;
 
-        if (elementData.getClass() != Object[].class) {
-            elementData = Arrays.copyOf(elementData, size, Object[].class);
-        }
+
+        elementData = Arrays.copyOf(elementData, size, Object[].class);
+
     }
 
-    public void trimToSize() {
+    private void trimToSize() {
         if (size < elementData.length) {
             elementData = Arrays.copyOf(elementData, size);
         }
     }
 
-    public void ensureCapacity(int minCapacity) {
+    private void ensureCapacity(int minCapacity) {
         int minExpand = (elementData != EMPTY_ELEMENTDATA) ? 0 : DEFAULT_CAPACITY;
         if (minCapacity > minExpand) {
             ensureExplicitCapacity(minCapacity);
@@ -82,7 +73,7 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
 
     private static int hugeCapacity(int minCapacity) {
         if (minCapacity < 0) {
-            throw new OutOfMemoryError();
+            throw new IllegalArgumentException();
         }
         return (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
     }
@@ -110,6 +101,14 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         System.arraycopy(a, 0, elementData, size, numNew);
         size += numNew;
     }
+    public void addAllSmt(Collection<E> elements) {
+        Object[] a = elements.toArray();
+        int numNew = a.length;
+        ensureCapacity(size + numNew);
+        System.arraycopy(a, 0, elementData, size, numNew);
+        size += numNew;
+    }
+
 
 
     @Override
@@ -203,4 +202,32 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
     private E elementData(int index) {
         return (E) elementData[index];
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        bugfix of incorrect equals
+        if (!(o instanceof MyList)) {
+            return false;
+        }
+
+        MyArrayList<?> that = (MyArrayList<?>) o;
+        if (size != that.size) return false;
+        return Arrays.equals(elementData, that.elementData);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Arrays.hashCode(elementData);
+        result = 31 * result + size;
+        return result;
+    }
+
+//    private class Itrtr extends Iterator<E>{
+//        int cursor = 0;
+//        int lastReturned = -1;
+//        int expectedModCount = modCount;
+//
+//    }
 }

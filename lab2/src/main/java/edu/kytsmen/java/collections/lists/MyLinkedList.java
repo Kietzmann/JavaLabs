@@ -170,5 +170,45 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
             this.next = next;
             this.previous = previous;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Entry<?> entry = (Entry<?>) o;
+
+            if (element != null ? !element.equals(entry.element) : entry.element != null) return false;
+            if (next != null ? !next.equals(entry.next) : entry.next != null) return false;
+            return previous != null ? previous.equals(entry.previous) : entry.previous == null;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = element != null ? element.hashCode() : 0;
+            result = 31 * result + (next != null ? next.hashCode() : 0);
+            result = 31 * result + (previous != null ? previous.hashCode() : 0);
+            return result;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MyLinkedList<?> that = (MyLinkedList<?>) o;
+
+        if (size != that.size) return false;
+        return header != null ? header.equals(that.header) : that.header == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = header != null ? header.hashCode() : 0;
+        result = 31 * result + size;
+        return result;
     }
 }

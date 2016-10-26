@@ -23,7 +23,7 @@ public class Cache<K, V> {
 //    public void put(K key, T value){
 //        synchronized (cacheMap)
 //    }
-    private volatile ConcurrentHashMap<Key, V> globalMap = new ConcurrentHashMap<Key, V>();
+    private ConcurrentHashMap<Key, V> globalMap = new ConcurrentHashMap<Key, V>();
     private long timeToLive;
     private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
         @Override
@@ -103,6 +103,7 @@ public class Cache<K, V> {
         }
     }
 
+    //TODO expired
 
     private static class Key {
         private final Object key;
