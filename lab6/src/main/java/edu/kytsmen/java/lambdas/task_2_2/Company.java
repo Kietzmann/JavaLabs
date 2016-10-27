@@ -35,12 +35,6 @@ public class Company {
         List<Order> orders = new ArrayList<>();
 
         return customers.stream().map(Customer::getOrders).collect(ArrayList::new, ArrayList::addAll, ArrayList::addAll);
-//
-//        orders = new ArrayList<>();
-//        for (Customer customer : this.customers) {
-//            orders.addAll(customer.getOrders());
-//        }
-//        return orders;
     }
 
     public Customer getMostRecentCustomer() {

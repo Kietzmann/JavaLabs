@@ -31,17 +31,6 @@ public class Exercise2OrdersTest extends CompanyDomain {
                         .mapToDouble(Customer::getTotalOrderValue)
                         .sum()));
 
-//        map.put("London", company.getCustomers().stream()
-//                .filter(customer -> customer.getCity() == "London")
-//                .map(customer -> customer.getTotalOrderValue())
-//                .reduce(0.0, Double::sum)
-//        );
-//        map.put("Liphook", company.getCustomers().stream()
-//                .filter(customer -> customer.getCity() == "Liphook")
-//                .map(customer -> customer.getTotalOrderValue())
-//                .reduce(0.0, Double::sum)
-//        );
-
         assertEquals(2, map.size());
         assertEquals(446.25, map.get("London"), 0.0);
         assertEquals(857.0, map.get("Liphook"), 0.0);
@@ -54,45 +43,7 @@ public class Exercise2OrdersTest extends CompanyDomain {
 
     @Test
     public void mostExpensiveItem() {
-        Map<Double, List<Customer>> map = new HashMap<>();
-//        company
-//                .getCustomers()
-//                .stream()
-//                .forEach(customer -> map.put(company
-//                        .getCustomers()
-//                        .stream()
-//                        .filter(c -> c.getName().equals(customer.getName()))
-//                        .map(customer1 -> customer.getOrders())
-//                        .collect(toList()),);
-//        map.put(company
-//                .getCustomers()
-//                .stream()
-//                .filter(customer ->), "Fred")
-
-
-//        company.getCustomers()
-//                .stream()
-//                .forEach(customer -> map.put(
-//                        company.getCustomers()
-//                                .stream()
-//                                .filter(c -> c.getName().equals(customer.getName()))
-//                                .collect(Collectors.mapping(Customer::getMostExpensiveItemValue))
-//                                ., customer.getName()
-//                ));
-//        List<Customer> valuesList;
-//        for (Customer cust : company.getCustomers()) {
-//            valuesList = new ArrayList<>();
-//            double price = cust.getOrders().stream().map(order -> order.getMostExpensiveItemValue()).max(Comparator.naturalOrder()).get();
-//            if (map.keySet().contains(price)) {
-//                valuesList = map.get(price);
-//                valuesList.add(cust);
-//                map.put(price, valuesList);
-//            } else {
-//                valuesList.add(cust);
-//                map.put(price, valuesList);
-//            }
-//
-//        }
+        Map<Double, List<Customer>> map;
         map = company.getCustomers().stream().collect(Collectors.groupingBy(Customer::getMostExpensiveItemValue, Collectors.toList()));
 
         Assert.assertEquals(2, map.size());
