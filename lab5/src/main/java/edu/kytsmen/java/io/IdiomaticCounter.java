@@ -11,10 +11,10 @@ public class IdiomaticCounter {
     private static final String MAX_NUMBER_OF_WORDS_IN_A_LINE_IS = "Max number of words in a line is: ";
     private static final String LINE_S_WITH_MAX_WORD_COUNT = "Line(s) with max word count: ";
     private int currentmaxCount = 0;
-    private List<String> lines = new ArrayList<String>();
+    private List<String> lines = new ArrayList<>();
 
     public List<String> readMaxLineCount(String fileName) {
-        List<String> lines = null;
+        List<String> extractedLines = null;
 //        FileInputStream fileInputStream;
 //        DataInputStream dataInputStream;
 //        BufferedReader bufferedReader = null;
@@ -23,16 +23,16 @@ public class IdiomaticCounter {
 //            dataInputStream = new DataInputStream(fileInputStream);
 //            bufferedReader = new BufferedReader(new InputStreamReader(dataInputStream));
             String line;
-            lines = new ArrayList<>();
+            extractedLines = new ArrayList<>();
             while ((line = bufferedReader.readLine()) != null) {
 
                 int count = (line.split("\\s+")).length;
                 if (count > currentmaxCount) {
-                    lines.clear();
-                    lines.add(line);
+                    extractedLines.clear();
+                    extractedLines.add(line);
                     currentmaxCount = count;
                 } else if (count == currentmaxCount) {
-                    lines.add(line);
+                    extractedLines.add(line);
                 }
             }
 
@@ -47,7 +47,7 @@ public class IdiomaticCounter {
 //                e.printStackTrace();
 //            }
         }
-        return lines;
+        return extractedLines;
     }
 
     public int getCurrentmaxCount() {
@@ -67,10 +67,10 @@ public class IdiomaticCounter {
     }
 
     public void processFilter(String filePath) {
-        List<String> lines = readMaxLineCount(filePath);
+        List<String> readedLines = readMaxLineCount(filePath);
         System.out.println(MAX_NUMBER_OF_WORDS_IN_A_LINE_IS + getCurrentmaxCount());
         System.out.println(LINE_S_WITH_MAX_WORD_COUNT);
-        for (String line : lines) {
+        for (String line : readedLines) {
             System.out.println(line);
         }
 

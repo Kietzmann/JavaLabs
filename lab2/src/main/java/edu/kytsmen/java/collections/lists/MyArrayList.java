@@ -1,7 +1,8 @@
 package edu.kytsmen.java.collections.lists;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Serializable {
     private static final int DEFAULT_CAPACITY = 10;
@@ -32,12 +33,6 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
 
     }
 
-    private void trimToSize() {
-        if (size < elementData.length) {
-            elementData = Arrays.copyOf(elementData, size);
-        }
-    }
-
     private void ensureCapacity(int minCapacity) {
         int minExpand = (elementData != EMPTY_ELEMENTDATA) ? 0 : DEFAULT_CAPACITY;
         if (minCapacity > minExpand) {
@@ -45,11 +40,11 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         }
     }
 
-    private void ensureCapacityInternal(int minCapacity) {
+    private void ensureCapacityInternal(int minimalCapacity) {
         if (elementData == EMPTY_ELEMENTDATA) {
-            minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+            minimalCapacity = Math.max(DEFAULT_CAPACITY, minimalCapacity);
         }
-        ensureExplicitCapacity(minCapacity);
+        ensureExplicitCapacity(minimalCapacity);
     }
 
     private void ensureExplicitCapacity(int minCapacity) {
@@ -101,6 +96,7 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         System.arraycopy(a, 0, elementData, size, numNew);
         size += numNew;
     }
+
     public void addAllSmt(Collection<E> elements) {
         Object[] a = elements.toArray();
         int numNew = a.length;
@@ -108,7 +104,6 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         System.arraycopy(a, 0, elementData, size, numNew);
         size += numNew;
     }
-
 
 
     @Override
@@ -149,7 +144,6 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
     @Override
     public void set(int index, E element) {
         rangeCheck(index);
-        E oldValue = elementData(index);
         elementData[index] = element;
     }
 
@@ -205,15 +199,17 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        bugfix of incorrect equals
+        if (this == o) {
+            return true;
+        }
         if (!(o instanceof MyList)) {
             return false;
         }
 
         MyArrayList<?> that = (MyArrayList<?>) o;
-        if (size != that.size) return false;
+        if (size != that.size) {
+            return false;
+        }
         return Arrays.equals(elementData, that.elementData);
     }
 
@@ -223,11 +219,4 @@ public class MyArrayList<E> implements MyList<E>, RandomAccess, Cloneable, Seria
         result = 31 * result + size;
         return result;
     }
-
-//    private class Itrtr extends Iterator<E>{
-//        int cursor = 0;
-//        int lastReturned = -1;
-//        int expectedModCount = modCount;
-//
-//    }
 }

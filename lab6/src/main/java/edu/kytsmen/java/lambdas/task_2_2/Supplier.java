@@ -1,7 +1,5 @@
 package edu.kytsmen.java.lambdas.task_2_2;
 
-import java.util.function.Function;
-
 /**
  * Created by olenasyrota on 6/28/16.
  */

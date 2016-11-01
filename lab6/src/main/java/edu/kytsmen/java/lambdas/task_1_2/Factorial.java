@@ -17,7 +17,7 @@ public class Factorial {
 
         //return factorial.apply(i);
 
-        long result = LongStream.iterate(1, e -> e + 1).limit(i).reduce(1, (x, y) -> x * y);
-        return result;
+
+        return LongStream.iterate(1, e -> e + 1).limit(i).reduce(1, (x, y) -> x * y);
     }
 }

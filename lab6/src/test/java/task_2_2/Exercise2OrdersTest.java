@@ -25,7 +25,6 @@ public class Exercise2OrdersTest extends CompanyDomain {
 // TODO refactor this
         Map<String, Double> map = new HashMap<>();
         company.getCustomers()
-                .stream()
                 .forEach(customerC -> map.put(customerC.getCity(), company.getCustomers().stream()
                         .filter(customer -> customer.getCity().equals(customerC.getCity()))
                         .mapToDouble(Customer::getTotalOrderValue)

@@ -1,7 +1,5 @@
 package edu.kytsmen.java.lambdas.task_2_2;
 
-import java.util.function.Function;
-
 /**
  * Created by olenasyrota on 6/28/16.
  */
@@ -9,6 +7,11 @@ public class LineItem {
 
     private String name;
     private final double value;
+
+    public LineItem(String name, double value) {
+        this.name = name;
+        this.value = value;
+    }
 
     public String getName() {
         return this.name;
@@ -20,11 +23,6 @@ public class LineItem {
 
     public double getValue() {
         return this.value;
-    }
-
-    public LineItem(String name, double value) {
-        this.name = name;
-        this.value = value;
     }
 
     @Override

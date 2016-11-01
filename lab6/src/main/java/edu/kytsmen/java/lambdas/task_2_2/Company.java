@@ -30,10 +30,6 @@ public class Company {
     }
 
     public List<Order> getOrders() {
-        assert (false);// Refactor this code to use lambdas
-
-        List<Order> orders = new ArrayList<>();
-
         return customers.stream().map(Customer::getOrders).collect(ArrayList::new, ArrayList::addAll, ArrayList::addAll);
     }
 

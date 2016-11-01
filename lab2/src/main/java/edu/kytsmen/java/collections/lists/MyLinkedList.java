@@ -6,7 +6,6 @@ package edu.kytsmen.java.collections.lists;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 
 /**
@@ -35,11 +34,11 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
 
     @Override
     public void add(int index, E element) {
-        addBefore(element, (index == size ? header : entry(index)));
+        addBefore(element, index == size ? header : entry(index));
     }
 
     private Entry<E> addBefore(E e, Entry<E> entry) {
-        Entry<E> newEntry = new Entry<E>(e, entry, entry.previous);
+        Entry<E> newEntry = new Entry<>(e, entry, entry.previous);
         newEntry.previous.next = newEntry;
         newEntry.next.previous = newEntry;
         size++;
@@ -62,10 +61,10 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
         if (numNew == 0)
             return;
 
-        Entry<E> successor = (index == size ? header : entry(index));
+        Entry<E> successor = index == size ? header : entry(index);
         Entry<E> predecessor = successor.previous;
         for (int i = 0; i < numNew; i++) {
-            Entry<E> e = new Entry<E>((E) a[i], successor, predecessor);
+            Entry<E> e = new Entry<>((E) a[i], successor, predecessor);
             predecessor.next = e;
             predecessor = e;
         }
@@ -173,13 +172,21 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             Entry<?> entry = (Entry<?>) o;
 
-            if (element != null ? !element.equals(entry.element) : entry.element != null) return false;
-            if (next != null ? !next.equals(entry.next) : entry.next != null) return false;
+            if (element != null ? !element.equals(entry.element) : entry.element != null) {
+                return false;
+            }
+            if (next != null ? !next.equals(entry.next) : entry.next != null) {
+                return false;
+            }
             return previous != null ? previous.equals(entry.previous) : entry.previous == null;
 
         }
@@ -195,12 +202,18 @@ public class MyLinkedList<E> implements MyList<E>, Cloneable, Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         MyLinkedList<?> that = (MyLinkedList<?>) o;
 
-        if (size != that.size) return false;
+        if (size != that.size) {
+            return false;
+        }
         return header != null ? header.equals(that.header) : that.header == null;
 
     }
