@@ -24,7 +24,10 @@ public class DynamicClassReloader extends ClassLoader {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     protected synchronized Class loadClass(String name,boolean resolve) throws ClassNotFoundException
     {
-        Class result= findClass(name);
+        String workingDir = System.getProperty("user.dir");
+        String delimiter = "/lab1/src/main/java/edu/kytsmen/java/classloader/beta/";
+        name = workingDir + delimiter + name;
+        Class result= findClass("edu.kytsmen.java.classloader.beta.");
         if (resolve)
             resolveClass(result);
         return result;

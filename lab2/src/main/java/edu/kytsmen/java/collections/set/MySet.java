@@ -1,4 +1,4 @@
-package edu.kytsmen.java.collections.lists;
+package edu.kytsmen.java.collections.set;
 
 import java.util.Collection;
 import java.util.Objects;

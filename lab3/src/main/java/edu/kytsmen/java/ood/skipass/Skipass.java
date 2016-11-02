@@ -1,7 +1,7 @@
 package edu.kytsmen.java.ood.skipass;
 
 
-import edu.kytsmen.java.ood.SkipassType;
+import edu.kytsmen.java.ood.utils.SkipassType;
 
 import java.time.LocalDateTime;
 
@@ -9,20 +9,20 @@ import java.time.LocalDateTime;
  * Created by dkytsmen on 9/20/16.
  */
 public abstract class Skipass {
-    protected int UID;
+    protected long uID;
     protected SkipassType passType;
     protected boolean blocked;
-    private LocalDateTime expireDate;
+    protected LocalDateTime expireDate;
 
 
-    public Skipass(int UID, SkipassType passType) {
-        this.UID = UID;
+    public Skipass(long uID, SkipassType passType) {
+        this.uID = uID;
         this.passType = passType;
         this.blocked = false;
     }
 
-    public Skipass(int UID, SkipassType passType, LocalDateTime expireDate) {
-        this(UID, passType);
+    public Skipass(int uID, SkipassType passType, LocalDateTime expireDate) {
+        this(uID, passType);
         this.expireDate = expireDate;
     }
 
@@ -30,8 +30,8 @@ public abstract class Skipass {
         this.blocked = blocked;
     }
 
-    public int getUID() {
-        return UID;
+    public long getUID() {
+        return uID;
     }
 
     public SkipassType getPassType() {

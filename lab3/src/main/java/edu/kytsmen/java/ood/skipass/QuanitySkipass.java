@@ -1,10 +1,8 @@
 package edu.kytsmen.java.ood.skipass;
 
-import edu.kytsmen.java.ood.SkipassType;
 import edu.kytsmen.java.ood.skipass.types.DayOfWeekType;
 import edu.kytsmen.java.ood.skipass.types.LimitedLiftType;
-
-import java.time.LocalDate;
+import edu.kytsmen.java.ood.utils.SkipassType;
 
 /**
  * Created by dkytsmen on 10/6/16.
@@ -12,19 +10,19 @@ import java.time.LocalDate;
 public class QuanitySkipass extends Skipass {
     private final LimitedLiftType liftType;
     private final DayOfWeekType dayType;
-    private int liftAmmount;
+    private int liftAmount;
 
-    public QuanitySkipass(int id, LimitedLiftType liftType, DayOfWeekType dayType, SkipassType type) {
+    public QuanitySkipass(long id, LimitedLiftType liftType, DayOfWeekType dayType, SkipassType type) {
         super(id, type);
         this.liftType = liftType;
         this.dayType = dayType;
-        this.liftAmmount = liftType.getAmount();
+        this.liftAmount = liftType.getAmount();
     }
 
     @Override
     public boolean isEligible() {
         if (!isExpired() && isCorrectDay()) {
-            liftAmmount--;
+            liftAmount--;
             return true;
         }
         return false;
@@ -32,14 +30,14 @@ public class QuanitySkipass extends Skipass {
 
     @Override
     public int getLiftsAmount() {
-        return 0;
+        return liftType.getAmount() - liftAmount;
     }
 
     private boolean isExpired() {
-        return liftAmmount == 0;
+        return liftAmount == 0;
     }
 
     private boolean isCorrectDay() {
-        return dayType.isAppropriateDay(LocalDate.now().getDayOfWeek());
+        return dayType.isAppropriateDay(getNow().getDayOfWeek());
     }
 }

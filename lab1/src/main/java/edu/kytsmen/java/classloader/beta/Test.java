@@ -11,7 +11,7 @@ public class Test {
         for (; ; ) {
             ClassLoader loader = new DynamicClassReloader(new String[]{"."});
             // текущий каталог "." будет единственным каталогом поиска
-            Class clazz = Class.forName("TestModule", true, loader);
+            Class clazz = Class.forName("TestModule.java", true, loader);
             Object object = clazz.newInstance();
             System.out.println(object);
             new BufferedReader(new InputStreamReader(System.in)).readLine();

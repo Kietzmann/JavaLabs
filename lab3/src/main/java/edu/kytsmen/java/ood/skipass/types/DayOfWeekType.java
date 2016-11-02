@@ -12,7 +12,7 @@ public enum DayOfWeekType {
     WEEKENDS(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY),
     WORKDAYS(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);
 
-    private Set<DayOfWeek> dayOfWeekSet;
+    private transient Set<DayOfWeek>  dayOfWeekSet;
 
     DayOfWeekType(DayOfWeek... dayOfWeeks) {
         this.dayOfWeekSet = new HashSet<>(Arrays.asList(dayOfWeeks));
