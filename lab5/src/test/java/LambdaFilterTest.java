@@ -1,14 +1,16 @@
 import edu.kytsmen.java.io.IdiomaticCounter;
+import edu.kytsmen.java.io.LambdaFilter;
+import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
 /**
- * Created by dkytsmen on 10/25/16.
+ * Created by dmytro on 07.11.16.
  */
-public class IdiomaticCounterTest extends Assert {
-    IdiomaticCounter counter = new IdiomaticCounter();
+public class LambdaFilterTest extends Assert{
+    LambdaFilter filter = new LambdaFilter();
     String workingDir = System.getProperty("user.dir");
     String delimiter = "/src/resources/";
 
@@ -18,8 +20,8 @@ public class IdiomaticCounterTest extends Assert {
         String filename = "empty";
         String filePath = workingDir + delimiter + filename;
         final String expectedResult = "File is empty";
-        List<String> result = counter.readMaxLineCount(filePath);
-        assertEquals(expectedResult, result.get(0));
+        Pair<Integer, String> result  = filter.filterList(filter.readFile(filePath));
+        assertEquals(expectedResult, result.getValue());
     }
 
     @Test
@@ -27,7 +29,7 @@ public class IdiomaticCounterTest extends Assert {
         String filename = "testfile";
         String filePath = workingDir + delimiter + filename;
         final String expectedResult = "aliquet. Fusce lacinia eu sem ac luctus. Phasellus in auctor est";
-        List<String> result = counter.readMaxLineCount(filePath);
-        assertEquals(expectedResult, result.get(0));
+        Pair<Integer, String> result  = filter.filterList(filter.readFile(filePath));
+        assertEquals(expectedResult, result.getValue());
     }
 }

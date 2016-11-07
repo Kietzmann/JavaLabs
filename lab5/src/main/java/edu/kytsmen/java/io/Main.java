@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         IdiomaticCounter counter = new IdiomaticCounter();
         String workingDir = System.getProperty("user.dir");
-        String filename = "testfile";
-        String delimiter = "/lab5/src/main/java/edu/kytsmen/java/io/";
+        String filename = "textfile";
+        String delimiter = "/lab5/src/resources/";
         String filePath = workingDir + delimiter + filename;
         counter.processFilter(filePath);
         System.out.println();

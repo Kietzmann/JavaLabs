@@ -22,7 +22,7 @@ public class LambdaFilter {
     }
 
     public Pair<Integer, String> filterList(List<String> unfilteredList) {
-        return unfilteredList.stream()
+        return unfilteredList.parallelStream()
                 .map(x -> new Pair<>(x.split("\\s").length, x))
                 .max((o1, o2) -> o1.getKey().compareTo(o2.getKey()))
                 .orElse(new Pair<>(0, "File is empty"));
