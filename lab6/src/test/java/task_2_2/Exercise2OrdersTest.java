@@ -22,14 +22,8 @@ public class Exercise2OrdersTest extends CompanyDomain {
     @Test
     public void totalOrderValuesByCity() {
         // implement customer.getTotalOrderValue() for this exercise;
-// TODO refactor this
         Map<String, Double> map = new HashMap<>();
-        company.getCustomers()
-                .forEach(customerC -> map.put(customerC.getCity(), company.getCustomers().stream()
-                        .filter(customer -> customer.getCity().equals(customerC.getCity()))
-                        .mapToDouble(Customer::getTotalOrderValue)
-                        .sum()));
-
+        map = company.getCustomers().stream().collect(Collectors.groupingBy(Customer::getCity, Collectors.summingDouble(Customer::getTotalOrderValue)));
         assertEquals(2, map.size());
         assertEquals(446.25, map.get("London"), 0.0);
         assertEquals(857.0, map.get("Liphook"), 0.0);
