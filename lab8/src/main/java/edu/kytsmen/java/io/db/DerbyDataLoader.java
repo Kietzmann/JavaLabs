@@ -1,4 +1,4 @@
-package edu.kytsmen.java.io;
+package edu.kytsmen.java.io.db;
 
 import javax.swing.*;
 import java.io.ObjectInputStream;
