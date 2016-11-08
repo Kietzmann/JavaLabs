@@ -10,10 +10,13 @@ public class Main {
         String filename = "textfile";
         String delimiter = "/lab5/src/resources/";
         String filePath = workingDir + delimiter + filename;
+        String dest = workingDir + delimiter + "empty";
         counter.processFilter(filePath);
         System.out.println();
         LambdaFilter filter = new LambdaFilter();
         filter.filter(filePath);
+        RibbonSorter sorter = new RibbonSorter();
+        sorter.invokeSorting(filePath, dest);
 
 
     }
